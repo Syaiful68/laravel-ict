@@ -42,9 +42,7 @@ function toggleMenu() {
                             <a class="nav-link" href="dashboard-1.html">
                                 ICT
                             </a>
-                            <a class="nav-link" href="dashboard-2.html"
-                                >Couriers</a
-                            >
+                            <a class="nav-link" href="dashboard-2.html">CCC</a>
                         </nav>
                     </div>
                     <!-- Sidenav Link (Charts)-->

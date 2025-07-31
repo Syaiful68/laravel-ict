@@ -27,17 +27,80 @@ import Layout from "../Layout/app.vue";
         <!-- Main page content-->
         <div class="container-xl px-4 mt-4">
             <div class="card">
-                <div class="card-header">Fluid Layout Example</div>
+                <div class="card-header">Ticket Request</div>
                 <div class="card-body">
-                    This is a second layout option that uses the
-                    <code>.container-fluid.px-4</code>
-                    element for the page header and main page content
-                    containers. If you expand the width of this page, the
-                    content will keep expanding with the screen, regardless of
-                    the screen width. On smaller screens, this will look no
-                    different than the default boxed layout which uses default
-                    <code>.container-xl.px-4</code>
-                    elements.
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Code Request</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BBA00029</td>
+                                <td>Orion</td>
+                                <td>Revisi</td>
+                                <td>Request</td>
+                                <td>
+                                    <button type="button" class="btn btn-link">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>BBA00029</td>
+                                <td>Orion</td>
+                                <td>Revisi</td>
+                                <td>Request</td>
+                                <td>
+                                    <button type="button" class="btn btn-link">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>BBA00029</td>
+                                <td>Orion</td>
+                                <td>Revisi</td>
+                                <td>Request</td>
+                                <td>
+                                    <button type="button" class="btn btn-link">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex">
+                        <div class="span">asd</div>
+                        <nav
+                            aria-label="Page navigation example d-flex justify-content-end"
+                        >
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Previous</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
