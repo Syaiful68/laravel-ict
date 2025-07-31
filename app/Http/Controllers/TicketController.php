@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TicketController extends Controller
 {
@@ -12,7 +14,10 @@ class TicketController extends Controller
     public function index()
     {
         //
-
+        $data = Ticket::all();
+        return Inertia::render('Ticket/index', [
+            'data' => $data
+        ]);
     }
 
     /**
@@ -21,6 +26,7 @@ class TicketController extends Controller
     public function create()
     {
         //
+        return Inertia::render('Ticket/create');
     }
 
     /**
@@ -29,6 +35,20 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'type' => 'required',
+            'category' => 'required',
+            'description' => 'required'
+        ]);
+
+        $code = 'BBA000009';
+        Ticket::create([
+            'code' => $code,
+            'type' => $request->type,
+            'category' => $request->category,
+            'description' => $request->description,
+            'user_id' => 1
+        ]);
     }
 
     /**
