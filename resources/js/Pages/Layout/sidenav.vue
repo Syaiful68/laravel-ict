@@ -48,6 +48,13 @@ function toggleMenu() {
                     <!-- Sidenav Link (Charts)-->
                     <a class="nav-link" href="charts.html">
                         <div class="nav-link-icon">
+                            <!-- <i class="fa-solid fa-users"></i> -->
+                            <i class="fa-solid fa-tachometer-fast"></i>
+                        </div>
+                        Couriers
+                    </a>
+                    <a class="nav-link" href="charts.html">
+                        <div class="nav-link-icon">
                             <i class="fa-solid fa-users"></i>
                         </div>
                         Users
