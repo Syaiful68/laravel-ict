@@ -16,7 +16,7 @@ function toggleMenu() {
                     <!-- Sidenav Menu Heading (Core)-->
                     <div class="sidenav-menu-heading">Menus</div>
                     <!-- Sidenav Accordion (Dashboard)-->
-                    <a
+                    <!-- <a
                         class="nav-link"
                         :class="{ collapsed: collapseMenu === true }"
                         @click="toggleMenu"
@@ -28,7 +28,7 @@ function toggleMenu() {
                         <div class="sidenav-collapse-arrow">
                             <i class="fas fa-angle-down"></i>
                         </div>
-                    </a>
+                    </a> -->
                     <div
                         class="collapse"
                         :class="{ show: collapseMenu === false }"
@@ -46,6 +46,20 @@ function toggleMenu() {
                         </nav>
                     </div>
                     <!-- Sidenav Link (Charts)-->
+                    <a class="nav-link" href="charts.html">
+                        <div class="nav-link-icon">
+                            <!-- <i class="fa-solid fa-users"></i> -->
+                            <i class="fa-solid fa-chart-bar"></i>
+                        </div>
+                        Ticketing
+                    </a>
+                    <a class="nav-link" href="charts.html">
+                        <div class="nav-link-icon">
+                            <!-- <i class="fa-solid fa-users"></i> -->
+                            <i class="fa-solid fa-edit"></i>
+                        </div>
+                        My Ticket
+                    </a>
                     <a class="nav-link" href="charts.html">
                         <div class="nav-link-icon">
                             <!-- <i class="fa-solid fa-users"></i> -->
