@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('tb_comments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('ticket_id');
+            $table->string('comments');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('tb_comments');
     }
 };

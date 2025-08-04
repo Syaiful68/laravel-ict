@@ -57,6 +57,10 @@ class TicketController extends Controller
     public function show(string $id)
     {
         //
+        $data = Ticket::query()->where('code_ticket', $id)->first();
+        return Inertia::render('Ticket/detail', [
+            'data' => $data
+        ]);
     }
 
     /**
@@ -73,6 +77,11 @@ class TicketController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = Ticket::query()->where('code_ticket', $id)->first();
+        $data->update([
+            'status' => $request->status,
+            'handling' => $request->handle
+        ]);
     }
 
     /**
@@ -81,5 +90,7 @@ class TicketController extends Controller
     public function destroy(string $id)
     {
         //
+        $data = Ticket::query()->where('code_ticket', $id)->first();
+        $data->delete();
     }
 }

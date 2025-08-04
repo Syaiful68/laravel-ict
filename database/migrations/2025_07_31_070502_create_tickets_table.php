@@ -11,8 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tickets', function (Blueprint $table) {
+        Schema::create('tb_tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('code_ticket');
+            $table->string('type');
+            $table->string('categories');
+            $table->longText('description');
+            $table->string('status');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_handle')->nullable();
+            $table->timestamp('date_handle')->nullable();
+            $table->string('handle')->nullable();
+            $table->softDeletes('deleted_at')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tickets');
+        Schema::dropIfExists('tb_tickets');
     }
 };

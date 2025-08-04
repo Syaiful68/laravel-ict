@@ -1,11 +1,20 @@
 <script setup>
 import { ref } from "vue";
+import ListMenu from "../../components/ListMenu.vue";
 
 const collapseMenu = ref(true);
 
 function toggleMenu() {
     return (collapseMenu.value = !collapseMenu.value);
 }
+
+const Menus = [
+    { label: "Dashboard", icons: "fa-chart-bar", path: "/dashboard" },
+    { label: "My Tickets", icons: "fa-edit", path: "/ticket" },
+    { label: "Couriers", icons: "fa-tachometer-fast", path: "/courier" },
+    { label: "Reports", icons: "fa-clipboard-list", path: "/report" },
+    { label: "Users", icons: "fa-users", path: "/user" },
+];
 </script>
 
 <template>
@@ -29,7 +38,7 @@ function toggleMenu() {
                             <i class="fas fa-angle-down"></i>
                         </div>
                     </a> -->
-                    <div
+                    <!-- <div
                         class="collapse"
                         :class="{ show: collapseMenu === false }"
                         id="collapseDashboards"
@@ -44,41 +53,16 @@ function toggleMenu() {
                             </a>
                             <a class="nav-link" href="dashboard-2.html">CCC</a>
                         </nav>
-                    </div>
+                    </div> -->
                     <!-- Sidenav Link (Charts)-->
-                    <a class="nav-link" href="charts.html">
-                        <div class="nav-link-icon">
-                            <!-- <i class="fa-solid fa-users"></i> -->
-                            <i class="fa-solid fa-chart-bar"></i>
-                        </div>
-                        Ticketing
-                    </a>
-                    <a class="nav-link" href="charts.html">
-                        <div class="nav-link-icon">
-                            <!-- <i class="fa-solid fa-users"></i> -->
-                            <i class="fa-solid fa-edit"></i>
-                        </div>
-                        My Ticket
-                    </a>
-                    <a class="nav-link" href="charts.html">
-                        <div class="nav-link-icon">
-                            <!-- <i class="fa-solid fa-users"></i> -->
-                            <i class="fa-solid fa-tachometer-fast"></i>
-                        </div>
-                        Couriers
-                    </a>
-                    <a class="nav-link" href="charts.html">
-                        <div class="nav-link-icon">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                        Users
-                    </a>
-                    <a class="nav-link" href="charts.html">
-                        <div class="nav-link-icon">
-                            <i class="fa-solid fa-clipboard-list"></i>
-                        </div>
-                        Reports
-                    </a>
+
+                    <ListMenu
+                        v-for="(item, index) in Menus"
+                        :key="index"
+                        :label="item.label"
+                        :icon="item.icons"
+                        :path="item.path"
+                    ></ListMenu>
                 </div>
             </div>
             <!-- Sidenav Footer-->

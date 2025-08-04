@@ -1,6 +1,14 @@
 <script setup>
+import { ref } from "vue";
 import Layout from "../Layout/app.vue";
 import TableView from "./partials/tableView.vue";
+import ModalView from "./partials/modalView.vue";
+
+const showModal = ref(false);
+
+function toggleModal() {
+    return (showModal.value = !showModal.value);
+}
 </script>
 
 <template>
@@ -21,6 +29,15 @@ import TableView from "./partials/tableView.vue";
                                 Ticketing list
                             </h1>
                         </div>
+                        <div class="col-12 col-xl-auto mb-3">
+                            <button
+                                class="btn btn-sm btn-light text-primary"
+                                @click="toggleModal"
+                            >
+                                <i class="fa-solid fa-plus me-1"></i>
+                                New Ticket
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,4 +51,5 @@ import TableView from "./partials/tableView.vue";
             </div>
         </div>
     </Layout>
+    <ModalView v-show="showModal" @toggle="toggleModal"></ModalView>
 </template>

@@ -19,7 +19,7 @@ class CommentController extends Controller
 
         Comment::create([
             'ticket_id' => $request->ticket,
-            'comment' => $request->comment,
+            'comments' => $request->comment,
             'user_id' => 1
         ]);
     }
