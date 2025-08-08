@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TicketController extends Controller
@@ -15,7 +17,7 @@ class TicketController extends Controller
     {
         //
         $data = Ticket::all();
-        return Inertia::render('Ticket/index', [
+        return Inertia::render('Ticketing/index', [
             'data' => $data
         ]);
     }
@@ -26,7 +28,7 @@ class TicketController extends Controller
     public function create()
     {
         //
-        return Inertia::render('Ticket/create');
+        return Inertia::render('Ticketing/create');
     }
 
     /**
@@ -36,19 +38,48 @@ class TicketController extends Controller
     {
         //
         $request->validate([
-            'type' => 'required',
             'category' => 'required',
+            'subcategory' => 'required',
             'description' => 'required'
         ]);
+        // dd($request->category['name']);
 
-        $code = 'BBA000009';
+        $query = Ticket::query()->latest()->first();
+        if ($query === null) {
+            $n = 1;
+        } else {
+            $n = $query->id + 1;
+        }
+
+        $h = 'ICT';
+        $code = $h . str_pad($n, 5, "0", STR_PAD_LEFT) . "-2025";
+
+        dd($request->all());
+        if ($request->file !== null) {
+            $file = $request->file('file');
+            $hashName = $file->getClientOriginalName();
+            $path = $file->storeAs('Ticket', $file->hashName(), 'public');
+            $uri = Storage::url($path);
+
+            Ticket::create([
+                'code_ticket' => $code,
+                'categories' => $request->category['name'],
+                'subcategories' => $request->subcategory,
+                'description' => $request->description,
+                'file_name' => $hashName,
+                'file_path' => $uri,
+                'user_id' => 1
+            ]);
+        }
         Ticket::create([
-            'code' => $code,
-            'type' => $request->type,
-            'category' => $request->category,
+            'code_ticket' => $code,
+            'categories' => $request->category['name'],
+            'subcategories' => $request->subcategory,
             'description' => $request->description,
             'user_id' => 1
         ]);
+
+        return to_route('ticket.index');
     }
 
     /**
@@ -58,7 +89,7 @@ class TicketController extends Controller
     {
         //
         $data = Ticket::query()->where('code_ticket', $id)->first();
-        return Inertia::render('Ticket/detail', [
+        return Inertia::render('Ticketing/detail', [
             'data' => $data
         ]);
     }

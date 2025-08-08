@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('tb_tickets', function (Blueprint $table) {
             $table->id();
             $table->string('code_ticket');
-            $table->string('type');
             $table->string('categories');
-            $table->longText('description');
-            $table->string('status');
+            $table->string('subcategories');
+            $table->text('description');
+            $table->string('status')->default('request');
+            $table->string('file_name');
+            $table->string('file_path');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('user_handle')->nullable();
             $table->timestamp('date_handle')->nullable();

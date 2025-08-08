@@ -4,6 +4,9 @@ import Layout from "../Layout/app.vue";
 import TableView from "./partials/tableView.vue";
 import ModalView from "./partials/modalView.vue";
 
+defineProps({
+    errors: Object,
+});
 const showModal = ref(false);
 
 function toggleModal() {
@@ -51,5 +54,9 @@ function toggleModal() {
             </div>
         </div>
     </Layout>
-    <ModalView v-show="showModal" @toggle="toggleModal"></ModalView>
+    <ModalView
+        v-show="showModal"
+        :errors="errors"
+        @toggle="toggleModal"
+    ></ModalView>
 </template>

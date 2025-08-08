@@ -2,6 +2,10 @@
 import { router, usePage } from "@inertiajs/vue3";
 import { computed, reactive } from "vue";
 
+defineProps({
+    errors: Object,
+});
+
 const Categories = [
     {
         id: 1,
@@ -25,16 +29,18 @@ const Categories = [
         id: 3,
         label: "Dashboard",
         name: "dashboard",
+        subCategori: [{ label: "Error", name: "error" }],
     },
 ];
 
 const page = usePage();
 
 const formData = reactive({
-    _token: page.props.csrf_token,
-    category: "",
-    subcategory: "",
+    _token: page.props.auth.csrf,
+    category: null,
+    subcategory: null,
     description: null,
+    file: null,
 });
 
 const subCategories = computed(() => {
@@ -45,7 +51,9 @@ const subCategories = computed(() => {
 });
 
 function submitTicket() {
-    router.post("/ticket", formData);
+    router.post("/ticket", formData, {
+        forceFormData: true,
+    });
 }
 </script>
 
@@ -70,6 +78,7 @@ function submitTicket() {
                             <select
                                 v-model="formData.category"
                                 class="form-control"
+                                :class="{ 'is-invalid': errors.category }"
                             >
                                 <option value="0">Choise</option>
                                 <option
@@ -77,15 +86,19 @@ function submitTicket() {
                                     :key="index"
                                     :value="item"
                                 >
-                                    {{ item.name }}
+                                    {{ item.label }}
                                 </option>
                             </select>
+                            <div class="invalid-feedback">
+                                {{ errors.category }}
+                            </div>
                         </div>
-                        <div class="mb-3" v-if="formData.category">
+                        <div class="mb-3" v-if="formData.category !== null">
                             <label class="form-label">Sub Category</label>
                             <select
                                 class="form-control"
                                 v-model="formData.subcategory"
+                                :class="{ 'is-invalid': errors.subcategory }"
                             >
                                 <option value="0">Choise</option>
                                 <option
@@ -96,10 +109,29 @@ function submitTicket() {
                                     {{ item.label }}
                                 </option>
                             </select>
+                            <div class="invalid-feedback">
+                                {{ errors.subcategory }}
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea
+                                class="form-control"
+                                rows="5"
+                                v-model="formData.description"
+                                :class="{ 'is-invalid': errors.description }"
+                            ></textarea>
+                            <div class="invalid-feedback">
+                                {{ errors.description }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <input
+                                type="file"
+                                class="form-control"
+                                @input="formData.file = $event.target.files[0]"
+                            />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -110,7 +142,7 @@ function submitTicket() {
                         >
                             Close</button
                         ><button class="btn btn-primary" type="submit">
-                            Save changes
+                            Save
                         </button>
                     </div>
                 </div>
